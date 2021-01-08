@@ -21,6 +21,7 @@ import { Delete, Edit } from "@material-ui/icons";
 import EditProductForm from "../components/EditProductForm";
 import { db } from "../lib/firebase";
 
+
 const useStyles = makeStyles((theme) => ({
   expand: {
     transform: "rotate(0deg)",
