@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
@@ -6,12 +6,11 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link as RouterLink } from "react-router-dom";
-import firebase from "firebase/app";
-import "firebase/auth";
 import Drawer from "./Drawer";
 import UserMenu from "./UserMenu";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import useAuth from "../hooks/useAuth";
+import { Link } from "@material-ui/core";
+import LoginDialog from "./LoginDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,9 +33,17 @@ const StyledNavItem = withStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const { isAuthenticated } = useAuth();
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   console.log(isAuthenticated);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -45,7 +52,13 @@ export default function ButtonAppBar() {
             <Drawer />
           </Box>
           <Typography variant="h6" className={classes.title}>
-            Restaurante Monse
+            <Link
+              to="/menu"
+              component={RouterLink}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Restaurante Monse
+            </Link>
           </Typography>
           <Box display={{ xs: "none", sm: "none", md: "block" }}>
             <StyledNavItem component={RouterLink} to="/acerca" color="inherit">
@@ -63,10 +76,7 @@ export default function ButtonAppBar() {
             <UserMenu />
           ) : (
             <Button
-              onClick={() => {
-                const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithPopup(googleAuthProvider);
-              }}
+              onClick={handleOpen}
               color="inherit"
               variant="outlined"
             >
@@ -75,6 +85,7 @@ export default function ButtonAppBar() {
           )}
         </Toolbar>
       </AppBar>
+      <LoginDialog handleClose={handleClose} open={open} />
     </div>
   );
 }

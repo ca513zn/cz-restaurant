@@ -21,10 +21,12 @@ import FastfoodIcon from "@material-ui/icons/Fastfood";
 import useAuth from "../hooks/useAuth";
 import LoginDialog from "../components/LoginDialog";
 import useFetchMenu from "../hooks/useFetchMenu";
+import OrderDialog from "../components/OrderDialog";
 
 const Menu = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [page, setPage] = useState(1);
+  const [orderDialog, setOrderDialog] = useState(null);
   const { results, loading, error } = useFetchMenu(page);
   const [opcion, setOpcion] = useState(0);
   const [open, setOpen] = useState(false);
@@ -35,9 +37,10 @@ const Menu = () => {
   };
   const handleClose = () => {
     setOpen(false);
+    setOrderDialog(false);
   };
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpen = (i) => {
+    isAuthenticated ? setOrderDialog(i) : setOpen(true);
   };
 
   const MenuCard = ({ el, i }) => {
@@ -82,12 +85,17 @@ const Menu = () => {
               color="primary"
               variant="outlined"
               endIcon={<RestaurantMenu />}
-              onClick={handleOpen}
+              onClick={() => handleOpen(i)}
             >
               Ordenar
             </Button>
           </CardActions>
         </Card>
+        <OrderDialog
+          open={orderDialog === i}
+          handleClose={handleClose}
+          title={el.nombre}
+        />
       </Grid>
     );
   };

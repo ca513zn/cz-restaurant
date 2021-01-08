@@ -7,23 +7,13 @@ import {
   DialogContent,
   TextField,
   Box,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React from "react";
-import useAuth from "../hooks/useAuth";
-import { Formik } from 'formik';
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const LoginDialog = ({ open, handleClose }) => {
-  const { signInWithEmailAndPassword, signInWithGoogle } = useAuth();
-
-  const handleGoogleClick = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>Bienvenido!</DialogTitle>
@@ -31,7 +21,13 @@ const LoginDialog = ({ open, handleClose }) => {
       <DialogContent>
         <Box mb={1} display="flex" justifyContent="center">
           <Button
-            onClick={handleGoogleClick}
+            onClick={() => {
+              const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+              firebase
+                .auth()
+                .signInWithPopup(googleAuthProvider)
+                .then(() => handleClose());
+            }}
             variant="outlined"
             startIcon={<img alt="Google" src="/static/images/google.svg" />}
           >
