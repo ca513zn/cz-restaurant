@@ -13,6 +13,7 @@ import {
   Typography,
   Tabs,
   Tab,
+  makeStyles,
 } from "@material-ui/core";
 import { RestaurantMenu } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
@@ -23,7 +24,17 @@ import LoginDialog from "../components/LoginDialog";
 import useFetchMenu from "../hooks/useFetchMenu";
 import OrderDialog from "../components/OrderDialog";
 
+const useStyles = makeStyles((theme) => ({
+  image: {
+    transition: "all 0.5s",
+    "&:hover": {
+      transform: "scale(1.5)",
+    },
+  },
+}));
+
 const Menu = () => {
+  const classes = useStyles();
   const { user, isAuthenticated } = useAuth();
   const [page, setPage] = useState(1);
   const [orderDialog, setOrderDialog] = useState(null);
@@ -48,13 +59,16 @@ const Menu = () => {
       <Grid item xs={12} sm={6} md={6} lg={6}>
         <Card raised>
           <CardHeader title={el.nombre} />
-          <CardMedia
-            style={{
-              height: 0,
-              paddingTop: "56.25%", // 16:9
-            }}
-            image={el.url}
-          />
+          <Box overflow="hidden">
+            <CardMedia
+              style={{
+                height: 0,
+                paddingTop: "56.25%", // 16:9
+              }}
+              className={classes.image}
+              image={el.url}
+            />
+          </Box>
           <CardContent>
             <Typography gutterBottom variant="body1">
               {el.descripcion}
