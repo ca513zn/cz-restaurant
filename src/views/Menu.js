@@ -14,6 +14,7 @@ import {
   Tabs,
   Tab,
   makeStyles,
+  Paper,
 } from "@material-ui/core";
 import { RestaurantMenu } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
@@ -115,7 +116,7 @@ const Menu = () => {
   };
 
   return (
-    <>
+    <Paper variant="outlined">
       <Box p={1}>
         <Typography variant="h4">Menu</Typography>
       </Box>
@@ -142,7 +143,7 @@ const Menu = () => {
         )}
       </Grid>
       <LoginDialog open={open} handleClose={handleClose} />
-    </>
+    </Paper>
   );
 };
 export default Menu;

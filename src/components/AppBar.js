@@ -28,6 +28,7 @@ const StyledNavItem = withStyles((theme) => ({
   root: {
     marginRight: 16,
     height: "64px",
+    color: theme.palette.primary.main,
   },
 }))(Button);
 
@@ -46,12 +47,12 @@ export default function ButtonAppBar() {
   };
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="secondary">
         <Toolbar>
           <Box display={{ xs: "block", md: "none" }}>
             <Drawer />
           </Box>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" color="red" className={classes.title}>
             <Link
               to="/menu"
               component={RouterLink}
@@ -77,6 +78,7 @@ export default function ButtonAppBar() {
           ) : (
             <Button
               onClick={handleOpen}
+              style={{ border: "1px solid red", color: "red" }}
               color="inherit"
               variant="outlined"
             >
