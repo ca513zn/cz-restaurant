@@ -7,6 +7,7 @@ import {
   Divider,
   TextField,
 } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 import React from "react";
 
 const OrderDialog = ({ open, title, handleClose }) => {
@@ -28,6 +29,9 @@ const OrderDialog = ({ open, title, handleClose }) => {
         <Divider />
         <DialogActions>
           <Button onClick={handleClose}>Cerrar</Button>
+          <Button startIcon={<Add />} variant="outlined" color="primary" onClick={handleClose}>
+            Agregar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

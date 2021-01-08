@@ -22,16 +22,16 @@ import { db } from "../lib/firebase";
 import { Fastfood } from "@material-ui/icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
-const EditProductForm = ({product}) => {
+const EditProductForm = ({ product }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log(product)
+  console.log(product);
   return (
     <Card raised>
       <Divider />
       <CardContent>
         <Formik
-          initialValues={{...product}}
+          initialValues={{ ...product }}
           validationSchema={Yup.object().shape({
             nombre: Yup.string().max(50).required("El nombre es necesario."),
             url: Yup.string().required("La imagen es necesaria."),
@@ -122,10 +122,11 @@ const EditProductForm = ({product}) => {
                         checked={values.refresco}
                         name="refresco"
                         onChange={handleChange}
+                        color="primary"
                       />
                     </Grid>
                     <Grid item>
-                      <Fastfood color="secondary" />
+                      <Fastfood color="primary" />
                     </Grid>
                   </Grid>
                 </Grid>

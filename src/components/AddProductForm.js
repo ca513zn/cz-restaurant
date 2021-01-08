@@ -165,10 +165,11 @@ const AddProductForm = () => {
                           checked={values.refresco}
                           name="refresco"
                           onChange={handleChange}
+                          color="primary"
                         />
                       </Grid>
                       <Grid item>
-                        <Fastfood color="secondary" />
+                        <Fastfood color="primary" />
                       </Grid>
                     </Grid>
                   </Grid>

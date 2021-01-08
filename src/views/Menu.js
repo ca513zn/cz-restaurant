@@ -70,7 +70,15 @@ const Menu = () => {
               image={el.url}
             />
           </Box>
-          <CardContent>
+          <CardContent
+            style={{
+              height: 120,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "space-between",
+            }}
+          >
             <Typography gutterBottom variant="body1">
               {el.descripcion}
             </Typography>

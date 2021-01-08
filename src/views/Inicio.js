@@ -42,6 +42,12 @@ const DemoCarousel = () => {
         autoPlay={true}
       >
         <div className={classes.imageContainer}>
+          <div className={classes.imageContainer}>
+            <img
+              src="https://www.codigounico.com/wp-content/uploads/sites/2/2019/04/los-mejores-vinos-para-carne-cual-es-el-adecuado-2.jpg"
+              alt="cover_3"
+            />
+          </div>
           <img
             src="https://www.codigounico.com/wp-content/uploads/sites/2/2019/04/los-mejores-vinos-para-carne-cual-es-el-adecuado-10.jpg"
             alt="cover_2"
