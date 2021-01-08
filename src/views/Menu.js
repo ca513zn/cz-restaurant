@@ -28,7 +28,7 @@ const Menu = () => {
   const { results, loading, error } = useFetchMenu(page);
   const [opcion, setOpcion] = useState(0);
   const [open, setOpen] = useState(false);
-  console.log(user);
+  console.log(results);
 
   const handleChange = (e, value) => {
     setOpcion(value);
@@ -106,7 +106,7 @@ const Menu = () => {
       <Grid container spacing={3}>
         {opcion === 0 && (
           <>
-            {entradas.map((el, i) => {
+            {results.map((el, i) => {
               return <MenuCard key={"comida-" + i} el={el} i={i} />;
             })}
           </>
