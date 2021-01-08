@@ -4,7 +4,7 @@ import firebase from "../lib/firebase";
 const initialAuthState = {
   isAuthenticated: false,
   isInitialised: false,
-  user: null
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -16,7 +16,7 @@ const reducer = (state, action) => {
         ...state,
         isAuthenticated,
         isInitialised: true,
-        user
+        user,
       };
     }
 
@@ -27,8 +27,8 @@ const reducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          [key]: value
-        }
+          [key]: value,
+        },
       };
     }
 
@@ -45,7 +45,7 @@ const AuthContext = createContext({
   signInWithEmailAndPassword: () => Promise.resolve(),
   signInWithGoogle: () => Promise.resolve(),
   logout: () => Promise.resolve(),
-  updateUser: () => {}
+  updateUser: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
@@ -74,8 +74,8 @@ export const AuthProvider = ({ children }) => {
       type: "UPDATE_USER",
       payload: {
         key: key,
-        value: value
-      }
+        value: value,
+      },
     });
   };
 
@@ -84,24 +84,26 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         // Here you should extract the complete user profile to make it available in your entire app.
         // The auth state only provides basic information.
-        console.log(user)
+        console.log(user.email);
         dispatch({
           type: "AUTH_STATE_CHANGED",
           payload: {
             isAuthenticated: true,
             user: {
               email: user.email,
-              name: user.displayName || user.email
-            }
-          }
+              name: user.displayName || user.email,
+              avatar: user.photoURL,
+              cart: [],
+            },
+          },
         });
       } else {
         dispatch({
           type: "AUTH_STATE_CHANGED",
           payload: {
             isAuthenticated: false,
-            user: null
-          }
+            user: null,
+          },
         });
       }
     });
@@ -118,7 +120,7 @@ export const AuthProvider = ({ children }) => {
         signInWithEmailAndPassword,
         signInWithGoogle,
         updateUser,
-        logout
+        logout,
       }}
     >
       {children}

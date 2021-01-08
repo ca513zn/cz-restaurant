@@ -15,37 +15,42 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { LocalHospital, RestaurantMenu } from "@material-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
-
+import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 const useStyles = makeStyles({
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
-    width: "auto"
-  }
+    width: "auto",
+  },
 });
 
 const navItems = [
   {
     name: "Acerca De",
     icon: <HelpOutlineIcon />,
-    url: "/acerca"
+    url: "/acerca",
   },
   {
     name: "Menu",
     icon: <RestaurantMenu />,
-    url: "/menu"
+    url: "/menu",
   },
   {
     name: "Medidas de Seguridad Covid-19",
     url: "/covid-19",
-    icon: <LocalHospital />
+    icon: <LocalHospital />,
   },
   {
     name: "Reservaciones",
     url: "/reservaciones",
-    icon: <HelpOutlineIcon />
-  }
+    icon: <HelpOutlineIcon />,
+  },
+  {
+    name: "Administracion",
+    url: "/admin",
+    icon: <SupervisorAccountOutlinedIcon />,
+  },
 ];
 
 export default function TemporaryDrawer() {
@@ -55,7 +60,7 @@ export default function TemporaryDrawer() {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -72,7 +77,7 @@ export default function TemporaryDrawer() {
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom"
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}

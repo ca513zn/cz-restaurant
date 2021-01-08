@@ -4,19 +4,10 @@ import AppBar from "./components/AppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Menu from "./views/Menu";
 import { AuthProvider } from "./contexts/AuthContext";
-import firebase from "firebase/app";
-import "firebase/auth";
-import {
-  FirebaseAuthProvider,
-  FirebaseAuthConsumer,
-  IfFirebaseAuthed,
-  IfFirebaseAuthedAnd
-} from "@react-firebase/auth";
-import { config } from "./config";
+import Admin from "./views/Admin";
 
 export default function App() {
   return (
-    <FirebaseAuthProvider {...config} firebase={firebase}>
       <AuthProvider>
         <Router>
           <AppBar />
@@ -25,9 +16,11 @@ export default function App() {
             <Route path="/menu">
               <Menu />
             </Route>
+            <Route path="/admin">
+              <Admin />
+            </Route>
           </Switch>
         </Router>
       </AuthProvider>
-    </FirebaseAuthProvider>
   );
 }

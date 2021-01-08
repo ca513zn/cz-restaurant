@@ -1,9 +1,12 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import { firebaseConfig } from '../config';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import { firebaseConfig } from "../config";
 
+let fb;
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+  fb = firebase.initializeApp(firebaseConfig);
 }
+export const db = fb.firestore();
 
-export default firebase;
+export default fb;
