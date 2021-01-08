@@ -13,7 +13,7 @@ const useFetchMenu = (page) => {
         await db.collection("products").onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             setResults((prevState) => {
-              return [...prevState, doc.data()];
+              return [...prevState, { ...doc.data(), id: doc.id }];
             });
           });
         });
