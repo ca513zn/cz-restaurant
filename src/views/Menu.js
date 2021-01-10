@@ -42,7 +42,6 @@ const Menu = () => {
   const { results, loading, error } = useFetchMenu(page);
   const [opcion, setOpcion] = useState(0);
   const [open, setOpen] = useState(false);
-  console.log(results);
 
   const handleChange = (e, value) => {
     setOpcion(value);
@@ -117,7 +116,7 @@ const Menu = () => {
         <OrderDialog
           open={orderDialog === i}
           handleClose={handleClose}
-          title={el.nombre}
+          item={el}
         />
       </Grid>
     );

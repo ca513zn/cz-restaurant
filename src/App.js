@@ -4,9 +4,11 @@ import AppBar from "./components/AppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Menu from "./views/Menu";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ShopProvider } from "./contexts/ShopContext";
 import Admin from "./views/Admin";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Inicio from "./views/Inicio";
+import Carrito from "./views/Carrito";
 
 const theme = createMuiTheme({
   palette: {
@@ -40,20 +42,25 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <Router>
-          <AppBar />
-          <Switch>
-            <Route path="/acerca">
-              <Inicio />
-            </Route>
-            <Route path="/menu">
-              <Menu />
-            </Route>
-            <Route path="/admin">
-              <Admin />
-            </Route>
-          </Switch>
-        </Router>
+        <ShopProvider>
+          <Router>
+            <AppBar />
+            <Switch>
+              <Route path="/acerca">
+                <Inicio />
+              </Route>
+              <Route path="/menu">
+                <Menu />
+              </Route>
+              <Route path="/admin">
+                <Admin />
+              </Route>
+              <Route path="/carrito">
+                <Carrito />
+              </Route>
+            </Switch>
+          </Router>
+        </ShopProvider>
       </AuthProvider>
     </ThemeProvider>
   );
