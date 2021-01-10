@@ -10,6 +10,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Inicio from "./views/Inicio";
 import Carrito from "./views/Carrito";
 
+//Creamos un tema de Material UI
 const theme = createMuiTheme({
   palette: {
     action: {
@@ -40,8 +41,11 @@ const theme = createMuiTheme({
 
 export default function App() {
   return (
+    //Envolvemos la aplicacion con el Tema
     <ThemeProvider theme={theme}>
+      {/* Proveedor de Autenticacion */}
       <AuthProvider>
+        {/* Proveedor de Carrito de Compras */}
         <ShopProvider>
           <Router>
             <AppBar />

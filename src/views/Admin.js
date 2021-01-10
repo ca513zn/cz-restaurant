@@ -5,7 +5,6 @@ import {
   Grid,
   Card,
   CardHeader,
-  CardContent,
   Divider,
   makeStyles,
   CircularProgress,
@@ -20,7 +19,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Delete, Edit } from "@material-ui/icons";
 import EditProductForm from "../components/EditProductForm";
 import { db } from "../lib/firebase";
-
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -55,7 +53,7 @@ const Admin = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const { results, loading, error } = useFetchMenu(page);
+  const { results, loading } = useFetchMenu(page);
   return (
     <div>
       <Box p={1}>

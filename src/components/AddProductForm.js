@@ -45,6 +45,9 @@ const AddProductForm = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  if (error) {
+    return <Card>Error loading product</Card>;
+  }
   return (
     <Card raised>
       <CardHeader

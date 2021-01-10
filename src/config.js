@@ -1,4 +1,5 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//Estos valores te los arroja firebase al momento de crear un nuevo proyecto.
+//Son variables de conexion a la base de datos creada por Google
 export const firebaseConfig = {
   apiKey: "AIzaSyCLqdtEPZx4Z9g5SAbv_VD9RmGAEYaN_Ls",
   authDomain: "restaurant-24ff3.firebaseapp.com",

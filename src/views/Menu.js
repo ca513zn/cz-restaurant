@@ -18,14 +18,14 @@ import {
 } from "@material-ui/core";
 import { RestaurantMenu } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
-import { entradas, bebidas } from "../menuItems";
+import { bebidas } from "../menuItems";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import useAuth from "../hooks/useAuth";
 import LoginDialog from "../components/LoginDialog";
 import useFetchMenu from "../hooks/useFetchMenu";
 import OrderDialog from "../components/OrderDialog";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   image: {
     transition: "all 0.5s",
     "&:hover": {
@@ -36,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Menu = () => {
   const classes = useStyles();
-  const { user, isAuthenticated } = useAuth();
-  const [page, setPage] = useState(1);
+  const { isAuthenticated } = useAuth();
+  const page = 1;
   const [orderDialog, setOrderDialog] = useState(null);
-  const { results, loading, error } = useFetchMenu(page);
+  const { results } = useFetchMenu(page);
   const [opcion, setOpcion] = useState(0);
   const [open, setOpen] = useState(false);
 

@@ -84,7 +84,6 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         // Here you should extract the complete user profile to make it available in your entire app.
         // The auth state only provides basic information.
-        console.log(user.email);
         dispatch({
           type: "AUTH_STATE_CHANGED",
           payload: {

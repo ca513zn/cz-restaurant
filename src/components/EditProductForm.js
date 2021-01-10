@@ -8,13 +8,9 @@ import {
   MenuItem,
   Box,
   Card,
-  CardHeader,
   CardContent,
   Divider,
   CircularProgress,
-  IconButton,
-  makeStyles,
-  Collapse,
 } from "@material-ui/core";
 
 import React, { useState } from "react";
@@ -25,7 +21,10 @@ import * as Yup from "yup";
 const EditProductForm = ({ product }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log(product);
+
+  if (error) {
+    return <Card>Error Fetching Product</Card>;
+  }
   return (
     <Card raised>
       <Divider />

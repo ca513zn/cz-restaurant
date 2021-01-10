@@ -1,53 +1,51 @@
-import React, { createContext, useEffect, useReducer } from "react";
-import firebase from "../lib/firebase";
+import React, { createContext, useReducer } from "react";
 
 const initialShopState = {
-    carrito: []
+  carrito: [],
 };
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case "ADD_ITEM": {
-            const { item } = action.payload;
-            console.log(item)
-            return {
-                carrito: [...state.carrito, item]
-            };
-        }
-
-        default: {
-            return { ...state };
-        }
+  switch (action.type) {
+    case "ADD_ITEM": {
+      const { item } = action.payload;
+      return {
+        carrito: [...state.carrito, item],
+      };
     }
+
+    default: {
+      return { ...state };
+    }
+  }
 };
 
 const ShopContext = createContext({
-    ...initialShopState,
-    addItem: () => { },
+  ...initialShopState,
+  addItem: () => {},
 });
 
 export const ShopProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialShopState);
+  const [state, dispatch] = useReducer(reducer, initialShopState);
 
-    const addItem = (item) => {
-        dispatch({
-            type: "ADD_ITEM",
-            payload: {
-                item: item
-            },
-        })
-    }
+  const addItem = (item) => {
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        item: item,
+      },
+    });
+  };
 
-    return (
-        <ShopContext.Provider
-            value={{
-                ...state,
-                addItem,
-            }}
-        >
-            {children}
-        </ShopContext.Provider>
-    );
+  return (
+    <ShopContext.Provider
+      value={{
+        ...state,
+        addItem,
+      }}
+    >
+      {children}
+    </ShopContext.Provider>
+  );
 };
 
 export default ShopContext;

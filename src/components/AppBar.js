@@ -36,7 +36,6 @@ export default function ButtonAppBar() {
   const { isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  console.log(isAuthenticated);
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,7 +51,7 @@ export default function ButtonAppBar() {
           <Box display={{ xs: "block", md: "none" }}>
             <Drawer />
           </Box>
-          <Typography variant="h6" color="red" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             <Link
               to="/menu"
               component={RouterLink}
