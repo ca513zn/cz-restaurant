@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar,Chip } from "@material-ui/core";
+import { Avatar, Badge, Chip } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link as RouterLink } from "react-router-dom";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
+import useShop from "../hooks/useShop";
 
 const StyledMenu = withStyles({
   paper: {
@@ -50,22 +51,30 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
+  const { carrito } = useShop();
+
   return (
     <div>
-      <Chip
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="default"
-        onClick={handleClick}
-        size="medium"
-        icon={<Avatar src={avatar} style={{ height: 24, width: 24 }} />}
-        label={name.split(" ")[0]}
-        style={{
-          color: "white",
-          border: "1px solid white",
-          backgroundColor: "transparent",
-        }}
-      />
+      <Badge
+        color="primary"
+        badgeContent={carrito.reduce((acc, val) => {
+          return parseInt(acc) + parseInt(val.cantidad);
+        }, 0)}
+      >
+        <Chip
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="default"
+          onClick={handleClick}
+          size="medium"
+          icon={<Avatar src={avatar} style={{ height: 24, width: 24 }} />}
+          label={name.split(" ")[0]}
+          style={{
+            color: "white",
+            backgroundColor: "transparent",
+          }}
+        />
+      </Badge>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

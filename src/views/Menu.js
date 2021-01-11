@@ -15,6 +15,7 @@ import {
   Tab,
   makeStyles,
   Paper,
+  Container,
 } from "@material-ui/core";
 import { RestaurantMenu } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
@@ -124,32 +125,34 @@ const Menu = () => {
 
   return (
     <Paper variant="outlined">
-      <Box p={1}>
-        <Typography variant="h4">Menu</Typography>
-      </Box>
-      <Box p={1}>
-        <Tabs value={opcion} indicatorColor="primary" onChange={handleChange}>
-          <Tab label="Entradas" />
-          <Tab label="Bebidas" />
-        </Tabs>
-      </Box>
-      <Grid container spacing={3}>
-        {opcion === 0 && (
-          <>
-            {results.map((el, i) => {
-              return <MenuCard key={"comida-" + i} el={el} i={i} />;
-            })}
-          </>
-        )}
-        {opcion === 1 && (
-          <>
-            {bebidas.map((el, i) => {
-              return <MenuCard key={"comida-" + i} el={el} i={i} />;
-            })}
-          </>
-        )}
-      </Grid>
-      <LoginDialog open={open} handleClose={handleClose} />
+      <Container>
+        <Box p={1}>
+          <Typography variant="h4">Menu</Typography>
+        </Box>
+        <Box p={1}>
+          <Tabs value={opcion} indicatorColor="primary" onChange={handleChange}>
+            <Tab label="Entradas" />
+            <Tab label="Bebidas" />
+          </Tabs>
+        </Box>
+        <Grid container spacing={3}>
+          {opcion === 0 && (
+            <>
+              {results.map((el, i) => {
+                return <MenuCard key={"comida-" + i} el={el} i={i} />;
+              })}
+            </>
+          )}
+          {opcion === 1 && (
+            <>
+              {bebidas.map((el, i) => {
+                return <MenuCard key={"comida-" + i} el={el} i={i} />;
+              })}
+            </>
+          )}
+        </Grid>
+        <LoginDialog open={open} handleClose={handleClose} />
+      </Container>
     </Paper>
   );
 };

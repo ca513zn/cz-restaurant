@@ -1,7 +1,9 @@
 import React from "react";
 import "./styles.css";
 import AppBar from "./components/AppBar";
+
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
 import Menu from "./views/Menu";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ShopProvider } from "./contexts/ShopContext";
