@@ -13,7 +13,7 @@ import useShop from "../hooks/useShop";
 
 const OrderDialog = ({ open, item, handleClose }) => {
   const [cantidad, setCantidad] = useState(1);
-  const { addItem, items } = useShop();
+  const { addItem } = useShop();
   const handleAddItem = () => {
     handleClose();
     addItem({
@@ -29,7 +29,6 @@ const OrderDialog = ({ open, item, handleClose }) => {
         <DialogContent>
           <TextField
             variant="outlined"
-            defaultValue={cantidad}
             inputProps={{ min: 1 }}
             type="number"
             name="cantidad"

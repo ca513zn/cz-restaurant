@@ -61,8 +61,8 @@ export default function ButtonAppBar() {
             </Link>
           </Typography>
           <Box display={{ xs: "none", sm: "none", md: "block" }}>
-            <StyledNavItem component={RouterLink} to="/acerca" color="inherit">
-              Acerca De
+            <StyledNavItem component={RouterLink} to="/inicio" color="inherit">
+              Inicio
             </StyledNavItem>
             <StyledNavItem component={RouterLink} to="/menu" color="inherit">
               Menu

@@ -25,7 +25,7 @@ const navItems = [
   {
     name: "Acerca De",
     icon: <HelpOutlineIcon />,
-    url: "/acerca",
+    url: "/inicio",
   },
   {
     name: "Menu",

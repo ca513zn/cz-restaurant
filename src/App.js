@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import AppBar from "./components/AppBar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Menu from "./views/Menu";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ShopProvider } from "./contexts/ShopContext";
@@ -50,7 +50,7 @@ export default function App() {
           <Router>
             <AppBar />
             <Switch>
-              <Route path="/acerca">
+              <Route path="/inicio">
                 <Inicio />
               </Route>
               <Route path="/menu">
@@ -61,6 +61,9 @@ export default function App() {
               </Route>
               <Route path="/carrito">
                 <Carrito />
+              </Route>
+              <Route exact path="/">
+              <Redirect to="/inicio" />
               </Route>
             </Switch>
           </Router>
