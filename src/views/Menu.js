@@ -29,12 +29,18 @@ import Page from "../components/Page";
 
 const useStyles = makeStyles(() => ({
   media: {
-    transition: "all 0.5s",
+    transition: "all 0.8s",
     "&:hover": {
-      transform: "scale(1.5)",
+      transform: "scale(1.2)",
     },
     height: 0,
     paddingTop: "56.25%",
+  },
+  fadeIn: {
+    animation: "$fadeIn 1.5s",
+  },
+  "@keyframes fadeIn": {
+    "0%": { transform: "translateY(15px)", opacity: 0 },
   },
 }));
 
@@ -76,7 +82,11 @@ const Menu = () => {
               <Rating size="small" max={5} readOnly value={el.popularidad} />
               <Box flexGrow={1} />
               {el.refresco && (
-                <Chip label="Incluye Refresco" size="small" icon={<FastfoodIcon />} />
+                <Chip
+                  label="Incluye Refresco"
+                  size="small"
+                  icon={<FastfoodIcon />}
+                />
               )}
             </Box>
           </CardContent>

@@ -24,17 +24,33 @@ import {
   CircularProgress,
   Container,
   IconButton,
+  makeStyles,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Delete,
+  AttachMoney,
   RestaurantMenu,
   SettingsEthernetSharp,
   SettingsRemoteSharp,
 } from "@material-ui/icons";
 import Page from "../components/Page";
 
+const useStyles = makeStyles((theme) => ({
+  bounceSimple: {
+    "&:hover": {
+      animation: "$bounceSimple 1s infinite",
+    },
+  },
+  "@keyframes bounceSimple": {
+    "0%, 20%, 50%, 80%, 100%": { transform: "scale(1)" },
+    "40%": { transform: "scale(1.3)" },
+    "60%": { transform: "scale(1.15)" },
+  },
+}));
+
 const Carrito = () => {
+  const classes = useStyles();
   const { carrito, deleteItem } = useShop();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
@@ -73,7 +89,7 @@ const Carrito = () => {
   return (
     <Page>
       <Container>
-        <Grid container spacing={2} justify="center">
+        <Grid container spacing={2} justify="center" direction="column">
           {!carrito.length ? (
             <Grid item>
               <Box mt={1}>
@@ -99,19 +115,19 @@ const Carrito = () => {
             </Grid>
           ) : (
             <Grid item>
-              <Box mt={1}>
-                <Typography
-                  variant="h4"
-                  textAlign="center"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Mi Carrito ({carrito.length})
-                </Typography>
-              </Box>
-              <Grid container spacing={1}>
+              <Grid container spacing={1} justify="center" direction="column">
+                <Grid item>
+                  <Typography
+                    variant="h4"
+                    textAlign="center"
+                    color="textPrimary"
+                    gutterBottom
+                  >
+                    Mi Carrito ({carrito.length})
+                  </Typography>
+                </Grid>
                 {carrito.map((el, i) => (
-                  <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <Grid item>
                     <Card raised>
                       <CardHeader
                         title={`${el.cantidad} - ${el.item.nombre}`}
@@ -134,16 +150,38 @@ const Carrito = () => {
                     </Card>
                   </Grid>
                 ))}
+                <Grid item>
+                  <Box display="flex" alignItems="center" p={2}>
+                    <Typography color="textPrimary" variant="h5">
+                      Total:
+                    </Typography>
+                    <Box flexGrow={1} />
+                    <Typography color="textPrimary" variant="h5">
+                      ${totalPago}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    width="100%"
+                    mt={1}
+                  >
+                    <Button
+                      fullWidth
+                      className={classes.bounceSimple}
+                      style={{ maxWidth: "200px" }}
+                      color="primary"
+                      variant="outlined"
+                      startIcon={<AttachMoney />}
+                      onClick={() => setOpen(true)}
+                    >
+                      Comprar
+                    </Button>
+                  </Box>
+                </Grid>
               </Grid>
-              <Box m={3} display="flex" alignItems="center">
-                <Typography color="textPrimary" variant="h5">
-                  Total:
-                </Typography>
-                <Box flexGrow={1} />
-                <Typography color="textPrimary" variant="h5">
-                  ${totalPago}
-                </Typography>
-              </Box>
             </Grid>
           )}
         </Grid>
