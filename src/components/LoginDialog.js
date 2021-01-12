@@ -41,7 +41,8 @@ const LoginDialog = ({ open, handleClose }) => {
             variant="outlined"
             startIcon={<img alt="Google" src="/static/images/google.svg" />}
           >
-            Entrar con Google
+            {step === "register" && "Registrar con Google"}
+            {step === "login" && "Ingresar con Google"}
           </Button>
         </Box>
         <Box mb={1}>
@@ -64,20 +65,22 @@ const LoginDialog = ({ open, handleClose }) => {
               label="Usuario"
             />
           </Grid>
-          <Grid item>
-            <TextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment>
-                    <Security />
-                  </InputAdornment>
-                ),
-              }}
-              variant="outlined"
-              fullWidth
-              label="Contrasena"
-            />
-          </Grid>
+          {step === "login" && (
+            <Grid item>
+              <TextField
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment>
+                      <Security />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+                fullWidth
+                label="Contrasena"
+              />
+            </Grid>
+          )}
           {step === "register" && (
             <>
               <Grid item>
@@ -152,28 +155,21 @@ const LoginDialog = ({ open, handleClose }) => {
               </Grid>
             </>
           )}
-          {step === "login" && (
-            <Grid item>
-              <Typography
-                variant="overline"
-                style={{ cursor: "pointer" }}
-                onClick={() => setStep("register")}
-              >
-                No tienes Cuenta? Registrate Aqui.
-              </Typography>
-            </Grid>
-          )}
-          {step === "register" && (
-            <Grid item>
-              <Typography
-                variant="overline"
-                style={{ cursor: "pointer" }}
-                onClick={() => setStep("login")}
-              >
-                Ya tienes Cuenta? Ingresa Aqui.
-              </Typography>
-            </Grid>
-          )}
+          <Grid item>
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              style={{ cursor: "pointer" }}
+              onClick={
+                step === "login"
+                  ? () => setStep("register")
+                  : () => setStep("login")
+              }
+            >
+              {step === "login" && "No tienes cuenta? Registrate aquí."}
+              {step === "register" && "Ya tienes cuenta? Ingresa aquí."}
+            </Typography>
+          </Grid>
         </Grid>
       </DialogContent>
       <Divider />
