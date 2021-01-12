@@ -11,6 +11,7 @@ import {
   IconButton,
   Collapse,
   Avatar,
+  Container,
 } from "@material-ui/core";
 import clsx from "clsx";
 import AddProductForm from "../components/AddProductForm";
@@ -19,6 +20,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Delete, Edit } from "@material-ui/icons";
 import EditProductForm from "../components/EditProductForm";
 import { db } from "../lib/firebase";
+import Page from "../components/Page";
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -55,76 +57,85 @@ const Admin = () => {
 
   const { results, loading } = useFetchMenu(page);
   return (
-    <div>
-      <Box p={1}>
-        <Typography variant="h4">Admin</Typography>
-      </Box>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
-          <AddProductForm />
+    <Page>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Typography variant="h4" color="textPrimary" gutterBottom>
+              Admin
+            </Typography>
+            <Grid item>
+              <AddProductForm />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
-          <Card raised>
-            <CardHeader
-              title={"Editar Productos"}
-              action={
-                <IconButton
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                  <ExpandMoreIcon />
-                </IconButton>
-              }
-            />
-            <Divider />
+        <Grid container spacing={3}>
+          {/* <Grid item xs={12} sm={6} md={6} lg={6}>
+            <AddProductForm />
+          </Grid> */}
+          <Grid item xs={12} sm={6} md={6} lg={6}>
+            <Card raised>
+              <CardHeader
+                title={"Editar Productos"}
+                action={
+                  <IconButton
+                    className={clsx(classes.expand, {
+                      [classes.expandOpen]: expanded,
+                    })}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </IconButton>
+                }
+              />
+              <Divider />
 
-            {loading && <CircularProgress />}
-            {results.map((el, i) => {
-              return (
-                <div key={"producto-" + i}>
-                  <Grid item xs={12}>
-                    <Card>
-                      <CardHeader
-                        avatar={<Avatar src={el.url} />}
-                        title={el.nombre}
-                        subheader={
-                          el.categoria.charAt(0).toUpperCase() +
-                          el.categoria.slice(1)
-                        }
-                        action={
-                          <Box display="flex" alignItems="center">
-                            <IconButton
-                              onClick={
-                                i === openIndex
-                                  ? handleCloseCollapse
-                                  : () => handleOpenCollapse(i)
-                              }
-                            >
-                              <Edit />
-                            </IconButton>
-                            <IconButton onClick={() => handleDelete(el.id)}>
-                              <Delete />
-                            </IconButton>
-                          </Box>
-                        }
-                      />
-                      <Collapse in={openIndex === i}>
-                        <EditProductForm product={el} />
-                      </Collapse>
-                    </Card>
-                  </Grid>
-                  <Divider />
-                </div>
-              );
-            })}
-          </Card>
+              {loading && <CircularProgress />}
+              {results.map((el, i) => {
+                return (
+                  <div key={"producto-" + i}>
+                    <Grid item xs={12}>
+                      <Card>
+                        <CardHeader
+                          avatar={<Avatar src={el.url} />}
+                          title={el.nombre}
+                          subheader={
+                            el.categoria.charAt(0).toUpperCase() +
+                            el.categoria.slice(1)
+                          }
+                          action={
+                            <Box display="flex" alignItems="center">
+                              <IconButton
+                                onClick={
+                                  i === openIndex
+                                    ? handleCloseCollapse
+                                    : () => handleOpenCollapse(i)
+                                }
+                              >
+                                <Edit />
+                              </IconButton>
+                              <IconButton onClick={() => handleDelete(el.id)}>
+                                <Delete />
+                              </IconButton>
+                            </Box>
+                          }
+                        />
+                        <Collapse in={openIndex === i}>
+                          <EditProductForm product={el} />
+                        </Collapse>
+                      </Card>
+                    </Grid>
+                    <Divider />
+                  </div>
+                );
+              })}
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </Container>
+    </Page>
   );
 };
 

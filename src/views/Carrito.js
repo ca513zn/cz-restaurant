@@ -25,6 +25,7 @@ import {
   Container,
   IconButton,
 } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Delete,
   RestaurantMenu,
@@ -89,6 +90,8 @@ const Carrito = () => {
                   color="primary"
                   startIcon={<RestaurantMenu />}
                   variant="outlined"
+                  to="/menu"
+                  component={RouterLink}
                 >
                   Ir a menu
                 </Button>
