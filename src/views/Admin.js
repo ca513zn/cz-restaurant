@@ -61,42 +61,22 @@ const Admin = () => {
       <Container>
         <Grid container spacing={2}>
           <Grid item>
-            <Typography variant="h4" color="textPrimary" gutterBottom>
+            <Typography variant="h4" color="textPrimary">
               Admin
             </Typography>
-            <Grid item>
-              <AddProductForm />
-            </Grid>
           </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          {/* <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Grid item>
             <AddProductForm />
-          </Grid> */}
-          <Grid item xs={12} sm={6} md={6} lg={6}>
+          </Grid>
+          <Grid item>
             <Card raised>
-              <CardHeader
-                title={"Editar Productos"}
-                action={
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                }
-              />
+              <CardHeader title={"Editar Productos"} />
               <Divider />
-
               {loading && <CircularProgress />}
               {results.map((el, i) => {
                 return (
                   <div key={"producto-" + i}>
-                    <Grid item xs={12}>
+                    <Grid item>
                       <Card>
                         <CardHeader
                           avatar={<Avatar src={el.url} />}
