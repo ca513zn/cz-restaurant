@@ -70,7 +70,13 @@ export default function ButtonAppBar() {
             <StyledNavItem color="inherit">
               Medidas de seguridad Covid-19
             </StyledNavItem>
-            <StyledNavItem color="inherit">Reservaciones</StyledNavItem>
+            <StyledNavItem
+              component={RouterLink}
+              to="/reservaciones"
+              color="inherit"
+            >
+              Reservaciones
+            </StyledNavItem>
           </Box>
           {isAuthenticated ? (
             <UserMenu />
