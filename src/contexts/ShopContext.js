@@ -1,7 +1,12 @@
 import React, { createContext, useReducer } from "react";
 
 const initialShopState = {
-  carrito: [],
+  carrito: [
+    { item: { nombre: "Rib Eye", precio: 12 }, cantidad: 5 },
+    { item: { nombre: "Rib Eye", precio: 12 }, cantidad: 5 },
+    { item: { nombre: "Rib Eye", precio: 12 }, cantidad: 5 },
+    { item: { nombre: "Rib Eye", precio: 12 }, cantidad: 5 },
+  ],
 };
 
 const reducer = (state, action) => {

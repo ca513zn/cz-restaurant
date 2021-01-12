@@ -2,6 +2,7 @@ import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { Box, makeStyles, Typography } from "@material-ui/core";
+import Page from "../components/Page";
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -33,7 +34,7 @@ const DemoCarousel = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <Page>
       <Carousel
         className={classes.carousel}
         showThumbs={false}
@@ -42,12 +43,12 @@ const DemoCarousel = () => {
         autoPlay={true}
       >
         <div className={classes.imageContainer}>
-          <div className={classes.imageContainer}>
-            <img
-              src="https://www.codigounico.com/wp-content/uploads/sites/2/2019/04/los-mejores-vinos-para-carne-cual-es-el-adecuado-2.jpg"
-              alt="cover_3"
-            />
-          </div>
+          <img
+            src="https://www.codigounico.com/wp-content/uploads/sites/2/2019/04/los-mejores-vinos-para-carne-cual-es-el-adecuado-2.jpg"
+            alt="cover_3"
+          />
+        </div>
+        <div className={classes.imageContainer}>
           <img
             src="https://www.codigounico.com/wp-content/uploads/sites/2/2019/04/los-mejores-vinos-para-carne-cual-es-el-adecuado-10.jpg"
             alt="cover_2"
@@ -67,11 +68,11 @@ const DemoCarousel = () => {
         </div>
       </Carousel>
       <Box mt={3}>
-        <Typography variant="h4" align="center">
+        <Typography variant="h4" align="center" color="textPrimary">
           Bienvenidos a Nuestro Excelente Restaurante!
         </Typography>
       </Box>
-    </>
+    </Page>
   );
 };
 

@@ -25,13 +25,16 @@ import useAuth from "../hooks/useAuth";
 import LoginDialog from "../components/LoginDialog";
 import useFetchMenu from "../hooks/useFetchMenu";
 import OrderDialog from "../components/OrderDialog";
+import Page from "../components/Page";
 
 const useStyles = makeStyles(() => ({
-  image: {
+  media: {
     transition: "all 0.5s",
     "&:hover": {
       transform: "scale(1.5)",
     },
+    height: 0,
+    paddingTop: "56.25%",
   },
 }));
 
@@ -61,37 +64,19 @@ const Menu = () => {
         <Card raised>
           <CardHeader title={el.nombre} />
           <Box overflow="hidden">
-            <CardMedia
-              style={{
-                height: 0,
-                paddingTop: "56.25%", // 16:9
-              }}
-              className={classes.image}
-              image={el.url}
-            />
+            <CardMedia className={classes.media} image={el.url} />
           </Box>
-          <CardContent
-            style={{
-              height: 120,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "space-between",
-            }}
-          >
+          <CardContent>
             <Typography gutterBottom variant="body1">
               {el.descripcion}
             </Typography>
+          </CardContent>
+          <CardContent>
             <Box display="flex" alignItems="center">
               <Rating size="small" max={5} readOnly value={el.popularidad} />
               <Box flexGrow={1} />
               {el.refresco && (
-                <Chip
-                  color="primary"
-                  label="Refresco"
-                  size="small"
-                  icon={<FastfoodIcon />}
-                />
+                <Chip label="Incluye Refresco" size="small" icon={<FastfoodIcon />} />
               )}
             </Box>
           </CardContent>
@@ -105,7 +90,6 @@ const Menu = () => {
             />
             <Box flexGrow={1} />
             <Button
-              color="primary"
               variant="outlined"
               endIcon={<RestaurantMenu />}
               onClick={() => handleOpen(i)}
@@ -124,36 +108,47 @@ const Menu = () => {
   };
 
   return (
-    <Paper variant="outlined">
+    <Page>
       <Container>
-        <Box p={1}>
-          <Typography variant="h4">Menu</Typography>
-        </Box>
-        <Box p={1}>
-          <Tabs value={opcion} indicatorColor="primary" onChange={handleChange}>
-            <Tab label="Entradas" />
-            <Tab label="Bebidas" />
-          </Tabs>
-        </Box>
-        <Grid container spacing={3}>
-          {opcion === 0 && (
-            <>
-              {results.map((el, i) => {
-                return <MenuCard key={"comida-" + i} el={el} i={i} />;
-              })}
-            </>
-          )}
-          {opcion === 1 && (
-            <>
-              {bebidas.map((el, i) => {
-                return <MenuCard key={"comida-" + i} el={el} i={i} />;
-              })}
-            </>
-          )}
+        <Grid container spacing={1} direction="column">
+          <Grid item>
+            <Typography variant="h4" color="textPrimary">
+              Menu
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Tabs
+              value={opcion}
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={handleChange}
+            >
+              <Tab label="Entradas" />
+              <Tab label="Bebidas" />
+            </Tabs>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              {opcion === 0 && (
+                <>
+                  {results.map((el, i) => {
+                    return <MenuCard key={"comida-" + i} el={el} i={i} />;
+                  })}
+                </>
+              )}
+              {opcion === 1 && (
+                <>
+                  {bebidas.map((el, i) => {
+                    return <MenuCard key={"comida-" + i} el={el} i={i} />;
+                  })}
+                </>
+              )}
+            </Grid>
+          </Grid>
         </Grid>
         <LoginDialog open={open} handleClose={handleClose} />
       </Container>
-    </Paper>
+    </Page>
   );
 };
 export default Menu;

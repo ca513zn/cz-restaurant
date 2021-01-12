@@ -11,6 +11,7 @@ import Admin from "./views/Admin";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Inicio from "./views/Inicio";
 import Carrito from "./views/Carrito";
+import GlobalStyles from "./components/GlobalStyles";
 
 //Creamos un tema de Material UI
 const theme = createMuiTheme({
@@ -45,6 +46,7 @@ export default function App() {
   return (
     //Envolvemos la aplicacion con el Tema
     <ThemeProvider theme={theme}>
+              <GlobalStyles />
       {/* Proveedor de Autenticacion */}
       <AuthProvider>
         {/* Proveedor de Carrito de Compras */}
