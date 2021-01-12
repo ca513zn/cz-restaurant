@@ -90,7 +90,7 @@ const Reservaciones = () => {
                   action={
                     <Tooltip title="Borrar Reservacion">
                       <IconButton>
-                        <DeleteOutline />
+                        <DeleteOutline color="primary" />
                       </IconButton>
                     </Tooltip>
                   }

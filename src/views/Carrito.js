@@ -3,11 +3,9 @@ import useShop from "../hooks/useShop";
 import {
   Grid,
   Card,
-  CardContent,
   Typography,
   CardHeader,
   Divider,
-  Paper,
   Box,
   Button,
   Dialog,
@@ -16,7 +14,6 @@ import {
   FormControlLabel,
   Radio,
   FormControl,
-  FormLabel,
   RadioGroup,
   DialogContent,
   Avatar,
@@ -31,8 +28,7 @@ import {
   Delete,
   AttachMoney,
   RestaurantMenu,
-  SettingsEthernetSharp,
-  SettingsRemoteSharp,
+  DeleteOutline,
 } from "@material-ui/icons";
 import Page from "../components/Page";
 
@@ -133,7 +129,8 @@ const Carrito = () => {
                         title={`${el.cantidad} - ${el.item.nombre}`}
                         avatar={
                           <IconButton>
-                            <Delete
+                            <DeleteOutline
+                              color="primary"
                               onClick={() => deleteItem(el.item.nombre)}
                             />
                           </IconButton>
