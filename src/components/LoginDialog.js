@@ -8,6 +8,7 @@ import {
   TextField,
   Box,
   Typography,
+  Grid,
 } from "@material-ui/core";
 import React from "react";
 import firebase from "firebase/app";
@@ -39,10 +40,20 @@ const LoginDialog = ({ open, handleClose }) => {
             O
           </Typography>
         </Box>
-        <Box mb={1}>
-          <TextField variant="outlined" fullWidth label="Usuario" />
-        </Box>
-        <TextField variant="outlined" fullWidth label="Contrasena" />
+        <Grid container direction="column" spacing={1}>
+          <Grid item>
+            <TextField variant="outlined" fullWidth label="Usuario" />
+          </Grid>
+          <Grid item>
+            <TextField variant="outlined" fullWidth label="Telefono" />
+          </Grid>
+          <Grid item>
+            <TextField variant="outlined" fullWidth label="Contrasena" />
+          </Grid>
+          <Grid item>
+            <TextField variant="outlined" fullWidth label="Domicilio" />
+          </Grid>
+        </Grid>
       </DialogContent>
       <Divider />
       <DialogActions>

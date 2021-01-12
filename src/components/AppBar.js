@@ -57,7 +57,7 @@ export default function ButtonAppBar() {
               component={RouterLink}
               style={{ color: "white", textDecoration: "none" }}
             >
-              Restaurante Monse
+              Quality Meat
             </Link>
           </Typography>
           <Box display={{ xs: "none", sm: "none", md: "block" }}>
