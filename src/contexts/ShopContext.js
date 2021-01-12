@@ -1,22 +1,8 @@
 import React, { createContext, useReducer } from "react";
 
 const initialShopState = {
-  carrito: [
-    {
-      item: {
-        nombre: "Chuleta",
-        precio: 30,
-      },
-      cantidad: 3,
-    },
-    {
-      item: {
-        nombre: "Chuleta",
-        precio: 30,
-      },
-      cantidad: 3,
-    },
-  ],
+  carrito: [],
+  reservaciones: Date.now(),
 };
 
 const reducer = (state, action) => {

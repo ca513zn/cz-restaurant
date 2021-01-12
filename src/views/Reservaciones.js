@@ -7,39 +7,24 @@ import {
   CardHeader,
   Divider,
   makeStyles,
-  CircularProgress,
   IconButton,
-  Collapse,
   Button,
-  Avatar,
   Container,
+  Tooltip,
 } from "@material-ui/core";
-import clsx from "clsx";
-import AddProductForm from "../components/AddProductForm";
+import moment from "moment";
 import DatePicker from "../components/DatePicker";
-import useFetchMenu from "../hooks/useFetchMenu";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Delete, Edit } from "@material-ui/icons";
-import EditProductForm from "../components/EditProductForm";
-import { db } from "../lib/firebase";
+import { DeleteOutline, Today } from "@material-ui/icons";
 import Page from "../components/Page";
 import useAuth from "../hooks/useAuth";
 import LoginDialog from "../components/LoginDialog";
+import useShop from "../hooks/useShop";
 
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-}));
 const Reservaciones = () => {
   const { isAuthenticated } = useAuth();
+
+  const { reservaciones } = useShop();
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -50,27 +35,6 @@ const Reservaciones = () => {
     setOpen(false);
   };
 
-  const [page, setPage] = useState(0);
-  const [openIndex, setOpenIndex] = useState(null);
-  const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  const handleOpenCollapse = (i) => {
-    setOpenIndex(i);
-  };
-  const handleCloseCollapse = () => {
-    setOpenIndex(null);
-  };
-
-  const handleDelete = async (id) => {
-    await db.collection("products").doc(id).delete();
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  const { results, loading } = useFetchMenu(page);
   if (!isAuthenticated) {
     return (
       <Page>
@@ -113,6 +77,39 @@ const Reservaciones = () => {
           </Grid>
           <Grid item>
             <DatePicker />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} direction="column">
+          <Grid item>
+            <Box width={1} display="flex" justifyContent="center">
+              <Card style={{ width: "100%", maxWidth: "420px" }}>
+                <CardHeader
+                  avatar={<Today />}
+                  title={moment(reservaciones).format("MMM DD YYYY")}
+                  subheader={moment(reservaciones).format("HH:MM")}
+                  action={
+                    <Tooltip title="Borrar Reservacion">
+                      <IconButton>
+                        <DeleteOutline />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+                <Divider />
+                <CardHeader
+                  title={"Nombre del Cliente"}
+                  subheader={"Personas: 5"}
+                />
+                <Divider />
+                <CardHeader
+                  action={
+                    <Typography variant="overline">
+                      Reservacion No: 12354
+                    </Typography>
+                  }
+                />
+              </Card>
+            </Box>
           </Grid>
         </Grid>
       </Container>

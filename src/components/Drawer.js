@@ -12,6 +12,8 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { LocalHospital, RestaurantMenu } from "@material-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
+import TodayIcon from "@material-ui/icons/Today";
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -40,7 +42,7 @@ const navItems = [
   {
     name: "Reservaciones",
     url: "/reservaciones",
-    icon: <HelpOutlineIcon />,
+    icon: <TodayIcon />,
   },
   {
     name: "Administracion",

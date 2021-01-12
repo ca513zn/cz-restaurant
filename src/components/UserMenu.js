@@ -11,11 +11,10 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link as RouterLink } from "react-router-dom";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import useShop from "../hooks/useShop";
+import TodayIcon from "@material-ui/icons/Today";
 
 const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-  },
+  paper: {},
 })((props) => (
   <Menu
     elevation={0}
@@ -50,6 +49,9 @@ export default function CustomizedMenus() {
     await logout();
     setAnchorEl(null);
   };
+
+  console.log(avatar)
+
 
   const { carrito } = useShop();
 
@@ -87,6 +89,12 @@ export default function CustomizedMenus() {
             <ShoppingCartIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Carrito" />
+        </MenuItem>
+        <MenuItem component={RouterLink} to="/reservaciones">
+          <ListItemIcon>
+            <TodayIcon />
+          </ListItemIcon>
+          <ListItemText primary="Reservaciones" />
         </MenuItem>
         <MenuItem component={RouterLink} to="/admin">
           <ListItemIcon>
