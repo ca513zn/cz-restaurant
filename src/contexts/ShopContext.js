@@ -12,6 +12,12 @@ const reducer = (state, action) => {
         carrito: [...state.carrito, item],
       };
     }
+    case "DELETE_ITEM": {
+      const { nombre } = action.payload;
+      return {
+        carrito: [...state.carrito.filter((el) => el.item.nombre !== nombre)],
+      };
+    }
 
     default: {
       return { ...state };
@@ -22,6 +28,7 @@ const reducer = (state, action) => {
 const ShopContext = createContext({
   ...initialShopState,
   addItem: () => {},
+  deleteItem: () => {},
 });
 
 export const ShopProvider = ({ children }) => {
@@ -35,12 +42,21 @@ export const ShopProvider = ({ children }) => {
       },
     });
   };
+  const deleteItem = (nombre) => {
+    dispatch({
+      type: "DELETE_ITEM",
+      payload: {
+        nombre: nombre,
+      },
+    });
+  };
 
   return (
     <ShopContext.Provider
       value={{
         ...state,
         addItem,
+        deleteItem,
       }}
     >
       {children}

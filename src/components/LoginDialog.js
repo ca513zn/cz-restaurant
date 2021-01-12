@@ -45,6 +45,13 @@ const LoginDialog = ({ open, handleClose }) => {
             <TextField variant="outlined" fullWidth label="Usuario" />
           </Grid>
           <Grid item>
+            <TextField
+              variant="outlined"
+              fullWidth
+              label="Correo Electronico"
+            />
+          </Grid>
+          <Grid item>
             <TextField variant="outlined" fullWidth label="Telefono" />
           </Grid>
           <Grid item>

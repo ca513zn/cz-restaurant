@@ -35,7 +35,7 @@ import {
 import Page from "../components/Page";
 
 const Carrito = () => {
-  const { carrito } = useShop();
+  const { carrito, deleteItem } = useShop();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -117,7 +117,9 @@ const Carrito = () => {
                         title={`${el.cantidad} - ${el.item.nombre}`}
                         avatar={
                           <IconButton>
-                            <Delete />
+                            <Delete
+                              onClick={() => deleteItem(el.item.nombre)}
+                            />
                           </IconButton>
                         }
                         subheader={`@ $${el.item.precio}.00`}
