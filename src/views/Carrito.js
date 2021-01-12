@@ -133,13 +133,13 @@ const Carrito = () => {
                   </Grid>
                 ))}
               </Grid>
-              <Box m={3}>
-                <Typography color="textPrimary" variant="h4">
+              <Box m={3} display="flex" alignItems="center">
+                <Typography color="textPrimary" variant="h5">
                   Total:
                 </Typography>
                 <Box flexGrow={1} />
-                <Typography color="textPrimary" variant="h4">
-                  {}
+                <Typography color="textPrimary" variant="h5">
+                  ${totalPago}
                 </Typography>
               </Box>
             </Grid>
