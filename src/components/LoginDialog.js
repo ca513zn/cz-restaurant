@@ -29,12 +29,15 @@ const LoginDialog = ({ open, handleClose }) => {
   const [password, setPassword] = useState("");
   const [telefono, setTelefono] = useState("");
   const [usuario, setUsuario] = useState("");
-  const { updateUser } = useAuth();
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
   const signInWithEmailAndPassword = () => {
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {})
+        .catch((err) => alert("Datos incorrectos!"));
       handleClose();
       setPassword("");
     } catch (error) {
@@ -47,7 +50,8 @@ const LoginDialog = ({ open, handleClose }) => {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {});
+        .then(() => {})
+        .catch((err) => alert("El correo ya existe!"));
       handleClose();
       setPassword("");
       setTelefono("");
@@ -70,17 +74,7 @@ const LoginDialog = ({ open, handleClose }) => {
               firebase
                 .auth()
                 .signInWithPopup(googleAuthProvider)
-                .then(({ user }) => {
-                  updateUser("avatar", user.photoURL);
-                  updateUser("email", user.email);
-                  updateUser("name", user.displayName);
-                  updateUser("id", user.uid);
-                  updateUser("phone", user.phoneNumber);
-                  if (user.email === "monsequintana0123@gmail.com") {
-                    updateUser("admin", true);
-                  } else {
-                    updateUser("admin", false);
-                  }
+                .then(() => {
                   handleClose();
                 });
             }}

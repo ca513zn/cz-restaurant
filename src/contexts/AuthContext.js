@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     return firebase.auth().signOut();
   };
 
-  const updateUser = ({ key, value }) => {
+  const updateUser = (key, value) => {
     dispatch({
       type: "UPDATE_USER",
       payload: {
@@ -82,8 +82,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        // Here you should extract the complete user profile to make it available in your entire app.
-        // The auth state only provides basic information.
+
+        //lista de admins
+        //CUALQUIER USUARIO CON ESTOS CORREOS PODRA
+        //ACCEDER A EDITAR PRODUCTOS
+        const admins = [
+          "monsequintana0123@gmail.com",
+        ];
+
         dispatch({
           type: "AUTH_STATE_CHANGED",
           payload: {
@@ -93,6 +99,7 @@ export const AuthProvider = ({ children }) => {
               name: user.displayName || user.email,
               avatar: user.photoURL,
               cart: [],
+              admin: admins.includes(user.email) ? true : false,
             },
           },
         });

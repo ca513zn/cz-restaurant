@@ -35,7 +35,7 @@ const StyledMenu = withStyles({
 export default function CustomizedMenus() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
-    user: { avatar, name },
+    user: { avatar, name, admin },
   } = useAuth();
 
   const handleClick = (event) => {
@@ -93,12 +93,14 @@ export default function CustomizedMenus() {
           </ListItemIcon>
           <ListItemText primary="Reservaciones" />
         </MenuItem>
-        <MenuItem component={RouterLink} to="/admin">
-          <ListItemIcon>
-            <SupervisorAccountOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Admin" />
-        </MenuItem>
+        {admin && (
+          <MenuItem component={RouterLink} to="/admin">
+            <ListItemIcon>
+              <SupervisorAccountOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Admin" />
+          </MenuItem>
+        )}
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <ExitToAppIcon fontSize="small" />

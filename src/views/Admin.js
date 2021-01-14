@@ -33,7 +33,7 @@ const Admin = () => {
   };
   const { results, loading } = useFetchMenu(page);
 
-  if (!user) {
+  if (!user.admin) {
     return <Redirect to="/inicio" />;
   }
 
