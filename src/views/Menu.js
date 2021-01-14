@@ -14,12 +14,10 @@ import {
   Tabs,
   Tab,
   makeStyles,
-  Paper,
   Container,
 } from "@material-ui/core";
 import { RestaurantMenu } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
-import { bebidas } from "../menuItems";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import useAuth from "../hooks/useAuth";
 import LoginDialog from "../components/LoginDialog";

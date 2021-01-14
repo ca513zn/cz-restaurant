@@ -25,7 +25,39 @@ import useAuth from "../hooks/useAuth";
 
 const LoginDialog = ({ open, handleClose }) => {
   const [step, setStep] = useState("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [usuario, setUsuario] = useState("");
   const { updateUser } = useAuth();
+  const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+  const signInWithEmailAndPassword = () => {
+    try {
+      firebase.auth().signInWithEmailAndPassword(email, password);
+      handleClose();
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createUserWithEmailAndPassword = async () => {
+    try {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {});
+      handleClose();
+      setPassword("");
+      setTelefono("");
+      setUsuario("");
+      setStep("login");
+      setEmail("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Dialog open={open} fullWidth>
@@ -35,7 +67,6 @@ const LoginDialog = ({ open, handleClose }) => {
         <Box mb={1} display="flex" justifyContent="center">
           <Button
             onClick={() => {
-              const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
               firebase
                 .auth()
                 .signInWithPopup(googleAuthProvider)
@@ -45,7 +76,7 @@ const LoginDialog = ({ open, handleClose }) => {
                   updateUser("name", user.displayName);
                   updateUser("id", user.uid);
                   updateUser("phone", user.phoneNumber);
-                  if (user.email === "ca513zn@gmail.com") {
+                  if (user.email === "monsequintana0123@gmail.com") {
                     updateUser("admin", true);
                   } else {
                     updateUser("admin", false);
@@ -68,16 +99,18 @@ const LoginDialog = ({ open, handleClose }) => {
         <Grid container direction="column" spacing={2}>
           <Grid item>
             <TextField
+              variant="outlined"
+              fullWidth
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Correo Electronico"
               InputProps={{
                 startAdornment: (
                   <InputAdornment>
-                    <AccountCircle />
+                    <Email />
                   </InputAdornment>
                 ),
               }}
-              variant="outlined"
-              fullWidth
-              label="Usuario"
             />
           </Grid>
           {step === "login" && (
@@ -92,12 +125,33 @@ const LoginDialog = ({ open, handleClose }) => {
                 }}
                 variant="outlined"
                 fullWidth
+                type="password"
                 label="Contrasena"
+                value={password}
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
           )}
           {step === "register" && (
             <>
+              <Grid item>
+                <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment>
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="outlined"
+                  fullWidth
+                  label="Usuario"
+                  value={usuario}
+                  name="usuario"
+                  onChange={(e) => setUsuario(e.target.value)}
+                />
+              </Grid>
               <Grid item>
                 <TextField
                   InputProps={{
@@ -110,22 +164,11 @@ const LoginDialog = ({ open, handleClose }) => {
                   variant="outlined"
                   fullWidth
                   label="Telefono"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
                 />
               </Grid>
-              <Grid item>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  label="Correo Electronico"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment>
-                        <Email />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
+
               <Grid item>
                 <TextField
                   variant="outlined"
@@ -149,6 +192,9 @@ const LoginDialog = ({ open, handleClose }) => {
                       </InputAdornment>
                     ),
                   }}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
                   variant="outlined"
                   fullWidth
                   label="Contrasena"
@@ -165,6 +211,7 @@ const LoginDialog = ({ open, handleClose }) => {
                   }}
                   variant="outlined"
                   fullWidth
+                  type="password"
                   label="Repite Contrasena"
                 />
               </Grid>
@@ -192,7 +239,15 @@ const LoginDialog = ({ open, handleClose }) => {
         <Button variant="outlined" onClick={handleClose}>
           Cancelar
         </Button>
-        <Button variant="outlined" color="primary" onClick={handleClose}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={
+            step === "register"
+              ? createUserWithEmailAndPassword
+              : signInWithEmailAndPassword
+          }
+        >
           {step === "register" && "Registar"}
           {step === "login" && "Ingresar"}
         </Button>

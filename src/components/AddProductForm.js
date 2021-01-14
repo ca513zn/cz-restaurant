@@ -12,39 +12,17 @@ import {
   CardContent,
   Divider,
   CircularProgress,
-  IconButton,
-  makeStyles,
-  Collapse,
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import React, { useState } from "react";
 import { db } from "../lib/firebase";
 import { Fastfood } from "@material-ui/icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import clsx from "clsx";
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-}));
 const AddProductForm = ({ setPage }) => {
-  const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   if (error) {
     return <Card>Error loading product</Card>;
   }

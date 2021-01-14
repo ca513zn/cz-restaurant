@@ -6,40 +6,24 @@ import {
   Card,
   CardHeader,
   Divider,
-  makeStyles,
   CircularProgress,
   IconButton,
   Collapse,
   Avatar,
   Container,
 } from "@material-ui/core";
-import clsx from "clsx";
 import AddProductForm from "../components/AddProductForm";
 import useFetchMenu from "../hooks/useFetchMenu";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Delete, Edit } from "@material-ui/icons";
 import EditProductForm from "../components/EditProductForm";
 import { db } from "../lib/firebase";
 import Page from "../components/Page";
 import { Redirect } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-}));
 const Admin = () => {
   const { user } = useAuth();
   const [page, setPage] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
-  const [expanded, setExpanded] = useState(false);
 
   const handleOpenCollapse = (i) => {
     setOpenIndex(i);

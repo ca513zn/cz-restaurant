@@ -12,7 +12,8 @@ import { Link as RouterLink } from "react-router-dom";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import useShop from "../hooks/useShop";
 import TodayIcon from "@material-ui/icons/Today";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 const StyledMenu = withStyles({
   paper: {},
 })((props) => (
@@ -34,7 +35,6 @@ const StyledMenu = withStyles({
 export default function CustomizedMenus() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
-    logout,
     user: { avatar, name },
   } = useAuth();
 
@@ -46,7 +46,7 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
   const handleLogout = async () => {
-    await logout();
+    await firebase.auth().signOut();
     setAnchorEl(null);
   };
 

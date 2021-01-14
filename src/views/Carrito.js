@@ -24,15 +24,10 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Delete,
-  AttachMoney,
-  RestaurantMenu,
-  DeleteOutline,
-} from "@material-ui/icons";
+import { AttachMoney, RestaurantMenu, DeleteOutline } from "@material-ui/icons";
 import Page from "../components/Page";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   bounceSimple: {
     "&:hover": {
       animation: "$bounceSimple 1s infinite",
@@ -290,7 +285,7 @@ const Carrito = () => {
                           alignItems="center"
                           width="100%"
                         >
-                          {value == "oxxo" && (
+                          {value === "oxxo" && (
                             <Typography
                               variant="h5"
                               textAlign="center"
@@ -300,7 +295,7 @@ const Carrito = () => {
                             </Typography>
                           )}
                         </Box>
-                        {value == "paypal" && (
+                        {value === "paypal" && (
                           <TextField
                             fullWidth
                             variant="outlined"
