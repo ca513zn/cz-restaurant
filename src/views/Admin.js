@@ -21,7 +21,8 @@ import { Delete, Edit } from "@material-ui/icons";
 import EditProductForm from "../components/EditProductForm";
 import { db } from "../lib/firebase";
 import Page from "../components/Page";
-
+import { Redirect } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 const useStyles = makeStyles((theme) => ({
   expand: {
     transform: "rotate(0deg)",
@@ -35,13 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Admin = () => {
+  const { user } = useAuth();
   const [page, setPage] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
-  const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const handleOpenCollapse = (i) => {
     setOpenIndex(i);
@@ -49,13 +47,17 @@ const Admin = () => {
   const handleCloseCollapse = () => {
     setOpenIndex(null);
   };
+  const { results, loading } = useFetchMenu(page);
+
+  if (!user) {
+    return <Redirect to="/inicio" />;
+  }
 
   const handleDelete = async (id) => {
     await db.collection("products").doc(id).delete();
     setPage((prevPage) => prevPage + 1);
   };
 
-  const { results, loading } = useFetchMenu(page);
   return (
     <Page>
       <Container>
@@ -66,7 +68,9 @@ const Admin = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <AddProductForm />
+            <AddProductForm
+              setPage={() => setPage((prevPage) => prevPage + 1)}
+            />
           </Grid>
           <Grid item>
             <Card raised>

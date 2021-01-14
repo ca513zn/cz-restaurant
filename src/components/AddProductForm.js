@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
 }));
-const AddProductForm = () => {
+const AddProductForm = ({ setPage }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 
@@ -77,6 +77,7 @@ const AddProductForm = () => {
               try {
                 await db.collection("products").doc().set(values);
                 setLoading(false);
+                setPage();
               } catch (error) {
                 setError(true);
                 setLoading(false);
@@ -133,9 +134,7 @@ const AddProductForm = () => {
                     select
                     fullWidth
                     type="categoria"
-                    onChange={(e) =>
-                      handleChange(e.target.name, e.target.value)
-                    }
+                    onChange={handleChange}
                   >
                     <MenuItem value="entrada">Entrada</MenuItem>
                     <MenuItem value="bebida">Bebida</MenuItem>

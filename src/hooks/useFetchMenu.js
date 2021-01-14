@@ -5,6 +5,10 @@ const useFetchMenu = (page) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setResults([]);
+  }, [page]);
   useEffect(() => {
     const request = async () => {
       setError(false);
@@ -24,7 +28,7 @@ const useFetchMenu = (page) => {
       }
     };
     request();
-  }, []);
+  }, [page]);
   return { results, loading, error };
 };
 

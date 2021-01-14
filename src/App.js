@@ -1,3 +1,4 @@
+//ESTE ARCHIVO ES EL PUNTO DE ENTRADA DE LA APLICACION
 //IMPORTANDO LA LIBRERIA REACT
 //ESTA LINEA SIEMPRE SE REQUIERE PARA PODER USAR LOS COMPONENTES REACT
 import React from "react";
@@ -61,6 +62,7 @@ export default function App() {
         {/* Proveedor de Autenticacion */}
         <AuthProvider>
           {/* Proveedor de Carrito de Compras */}
+          {/* El proveedor ayuda a guardar los valores del carrito dentro de la aplicacion, sin importar en que pagina se encuentre el usuario */}
           <ShopProvider>
             <Router>
               <AppBar />
@@ -71,8 +73,9 @@ export default function App() {
                 <Route path="/menu">
                   <Menu />
                 </Route>
-                <Route path="/admin">
+                <Route exact path="/admin">
                   <Admin />
+                  
                 </Route>
                 <Route path="/reservaciones">
                   <Reservaciones />

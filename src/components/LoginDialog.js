@@ -39,13 +39,17 @@ const LoginDialog = ({ open, handleClose }) => {
               firebase
                 .auth()
                 .signInWithPopup(googleAuthProvider)
-                .then(({user}) => {
-                  console.log(user)
-                  updateUser('avatar', user.photoURL)
-                  updateUser('email', user.email)
-                  updateUser('name', user.displayName)
-                  updateUser('id', user.uid)
-                  updateUser('phone', user.phoneNumber)
+                .then(({ user }) => {
+                  updateUser("avatar", user.photoURL);
+                  updateUser("email", user.email);
+                  updateUser("name", user.displayName);
+                  updateUser("id", user.uid);
+                  updateUser("phone", user.phoneNumber);
+                  if (user.email === "ca513zn@gmail.com") {
+                    updateUser("admin", true);
+                  } else {
+                    updateUser("admin", false);
+                  }
                   handleClose();
                 });
             }}

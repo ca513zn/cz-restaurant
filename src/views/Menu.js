@@ -141,16 +141,20 @@ const Menu = () => {
             <Grid container spacing={3}>
               {opcion === 0 && (
                 <>
-                  {results.map((el, i) => {
-                    return <MenuCard key={"comida-" + i} el={el} i={i} />;
-                  })}
+                  {results
+                    .filter((e) => e.categoria === "entrada")
+                    .map((el, i) => {
+                      return <MenuCard key={"comida-" + i} el={el} i={i} />;
+                    })}
                 </>
               )}
               {opcion === 1 && (
                 <>
-                  {bebidas.map((el, i) => {
-                    return <MenuCard key={"comida-" + i} el={el} i={i} />;
-                  })}
+                  {results
+                    .filter((e) => e.categoria === "bebida")
+                    .map((el, i) => {
+                      return <MenuCard key={"comida-" + i} el={el} i={i} />;
+                    })}
                 </>
               )}
             </Grid>

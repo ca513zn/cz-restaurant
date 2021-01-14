@@ -27,7 +27,6 @@ export default function DateAndTimePickers({ setReservacion }) {
   });
 
   const handleValueChange = (key, value) => {
-    console.log(value);
     setValues((prevState) => {
       return {
         ...prevState,
@@ -56,13 +55,11 @@ export default function DateAndTimePickers({ setReservacion }) {
     const citiesRef = db.collection("reservations");
     const snapshot = await citiesRef.where("nombre", "==", user.name).get();
     if (snapshot.empty) {
-      console.log("No matching documents.");
       return;
     }
 
     snapshot.forEach((doc) => {
       setReservacion({ id: doc.id, ...doc.data() });
-      console.log(doc.id, "=>", doc.data());
     });
   };
   useEffect(() => {

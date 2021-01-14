@@ -50,9 +50,6 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
-  console.log(avatar)
-
-
   const { carrito } = useShop();
 
   return (
