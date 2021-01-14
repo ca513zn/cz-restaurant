@@ -1,4 +1,7 @@
+//IMPORTANDO LA LIBRERIA REACT
+//ESTA LINEA SIEMPRE SE REQUIERE PARA PODER USAR LOS COMPONENTES REACT
 import React from "react";
+//ESTA LINEA IMPORTA LOS ESTILOS CSS
 import "./styles.css";
 import AppBar from "./components/AppBar";
 import {

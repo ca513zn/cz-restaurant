@@ -2,11 +2,11 @@
 //Son variables de conexion a la base de datos creada por Google
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyC8dGDUbPVHD-AeVKZj02gIzRGtb5koacQ",
-  authDomain: "restaurante-92294.firebaseapp.com",
-  projectId: "restaurante-92294",
-  storageBucket: "restaurante-92294.appspot.com",
-  messagingSenderId: "372873592062",
-  appId: "1:372873592062:web:96470233df6b25c8e739af",
-  measurementId: "G-X87RB8MG1T"
+  apiKey: "AIzaSyBkOeke9sV3qrVnd6bmc3y4NMLcTAQKHvs",
+  authDomain: "restaurante-4b3f1.firebaseapp.com",
+  projectId: "restaurante-4b3f1",
+  storageBucket: "restaurante-4b3f1.appspot.com",
+  messagingSenderId: "453870441128",
+  appId: "1:453870441128:web:9077aefac4ba656baaa89d",
+  measurementId: "G-PHSBF6WT6M",
 };

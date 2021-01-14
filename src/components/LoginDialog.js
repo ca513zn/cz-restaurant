@@ -21,9 +21,12 @@ import {
   Phone,
   Security,
 } from "@material-ui/icons";
+import useAuth from "../hooks/useAuth";
 
 const LoginDialog = ({ open, handleClose }) => {
   const [step, setStep] = useState("login");
+  const { updateUser } = useAuth();
+
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>Bienvenido!</DialogTitle>
@@ -36,7 +39,15 @@ const LoginDialog = ({ open, handleClose }) => {
               firebase
                 .auth()
                 .signInWithPopup(googleAuthProvider)
-                .then(() => handleClose());
+                .then(({user}) => {
+                  console.log(user)
+                  updateUser('avatar', user.photoURL)
+                  updateUser('email', user.email)
+                  updateUser('name', user.displayName)
+                  updateUser('id', user.uid)
+                  updateUser('phone', user.phoneNumber)
+                  handleClose();
+                });
             }}
             variant="outlined"
             startIcon={<img alt="Google" src="/static/images/google.svg" />}
