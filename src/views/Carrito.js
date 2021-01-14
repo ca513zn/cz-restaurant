@@ -22,9 +22,15 @@ import {
   Container,
   IconButton,
   makeStyles,
+  InputAdornment,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import { AttachMoney, RestaurantMenu, DeleteOutline } from "@material-ui/icons";
+import {
+  AttachMoney,
+  RestaurantMenu,
+  DeleteOutline,
+  CreditCard,
+} from "@material-ui/icons";
 import Page from "../components/Page";
 
 const useStyles = makeStyles(() => ({
@@ -42,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
 const Carrito = () => {
   const classes = useStyles();
-  const { carrito, deleteItem } = useShop();
+  const { carrito, deleteItem, emptyCart } = useShop();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -60,6 +66,8 @@ const Carrito = () => {
     setTimeout(() => {
       setLoading(false);
       setPagado(true);
+      setStep(3);
+      emptyCart();
     }, 3000);
   };
 
@@ -285,6 +293,21 @@ const Carrito = () => {
                           alignItems="center"
                           width="100%"
                         >
+                          {value === "tarjeta" && (
+                            <TextField
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment>
+                                    <CreditCard />
+                                  </InputAdornment>
+                                ),
+                              }}
+                              type="text"
+                              fullWidth
+                              variant="outlined"
+                              label="Tarjeta"
+                            />
+                          )}
                           {value === "oxxo" && (
                             <Typography
                               variant="h5"
@@ -338,7 +361,7 @@ const Carrito = () => {
           )}
           {step === 3 && (
             <>
-              <DialogTitle>Ingresa tu Codigo de OXXO:</DialogTitle>
+              <DialogTitle>Gracias por tu Compra!</DialogTitle>
               <Divider />
               <DialogContent>
                 {loading ? (
@@ -388,18 +411,30 @@ const Carrito = () => {
               </DialogContent>
               <Divider />
               <DialogActions>
-                <Button onClick={() => setStep(1)}>Atras</Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={
-                    value === "oxxo" && step !== 3
-                      ? handleOxxoPay
-                      : handleLoading
-                  }
-                >
-                  Pagar
-                </Button>
+                {step !== 3 && (
+                  <Button onClick={() => setStep(1)}>Atras</Button>
+                )}
+                {step === 3 ? (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => setOpen(false)}
+                  >
+                    Terminar
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={
+                      value === "oxxo" && step !== 3
+                        ? handleOxxoPay
+                        : handleLoading
+                    }
+                  >
+                    Pagar
+                  </Button>
+                )}
               </DialogActions>
             </>
           )}

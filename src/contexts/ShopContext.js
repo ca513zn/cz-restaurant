@@ -18,6 +18,11 @@ const reducer = (state, action) => {
         carrito: [...state.carrito.filter((el) => el.item.nombre !== nombre)],
       };
     }
+    case "VACIAR_CARRITO": {
+      return {
+        carrito: [],
+      };
+    }
 
     default: {
       return { ...state };
@@ -29,6 +34,7 @@ const ShopContext = createContext({
   ...initialShopState,
   addItem: () => {},
   deleteItem: () => {},
+  emptyCart: () => {},
 });
 
 export const ShopProvider = ({ children }) => {
@@ -50,6 +56,11 @@ export const ShopProvider = ({ children }) => {
       },
     });
   };
+  const emptyCart = () => {
+    dispatch({
+      type: "VACIAR_CARRITO",
+    });
+  };
 
   return (
     <ShopContext.Provider
@@ -57,6 +68,7 @@ export const ShopProvider = ({ children }) => {
         ...state,
         addItem,
         deleteItem,
+        emptyCart,
       }}
     >
       {children}
